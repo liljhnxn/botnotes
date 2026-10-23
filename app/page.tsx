@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { WalletButton } from "@/components/WalletButton";
 import { NotesOverview } from "@/components/NotesOverview";
 import { NoteForm } from "@/components/NoteForm";
@@ -16,6 +16,26 @@ export default function Home() {
   const handleRefresh = () => {
     setRefreshToken((prev) => prev + 1);
   };
+
+  // Purge any legacy testnet contract addresses from browser storage
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const keysToRemove = [
+        "chainnotes_contract_address",
+        "botnotes_contract_address",
+        "botnotes_testnet_address",
+        "contractAddress",
+        "deployedContract",
+      ];
+      keysToRemove.forEach((key) => {
+        try {
+          localStorage.removeItem(key);
+        } catch {
+          // ignore storage errors
+        }
+      });
+    }
+  }, []);
 
   const scrollToForm = () => {
     formRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -173,12 +193,16 @@ export default function Home() {
 
             {BOT_NOTES_CONTRACT_ADDRESS && (
               <a
+                id="footer-contract-explorer-link"
                 href={`https://scan.botchain.ai/address/${BOT_NOTES_CONTRACT_ADDRESS}`}
                 target="_blank"
                 rel="noreferrer"
-                className="font-mono text-[11px] text-slate-400 hover:text-emerald-400 transition-colors"
+                className="inline-flex items-center gap-1.5 text-[11px] text-slate-400 hover:text-emerald-400 transition-colors font-medium"
+                title="View Verified Contract on Botchain Mainnet Explorer"
               >
-                Contract: {BOT_NOTES_CONTRACT_ADDRESS.slice(0, 10)}...{BOT_NOTES_CONTRACT_ADDRESS.slice(-8)}
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span>Botchain Mainnet Explorer</span>
+                <ExternalLink className="w-3 h-3" />
               </a>
             )}
           </div>

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useAccount, useReadContract } from "wagmi";
 import { BOT_NOTES_CONTRACT_ADDRESS, BOT_NOTES_ABI, NoteItem } from "@/lib/contract";
 import { EditNoteModal } from "./EditNoteModal";
-import { FileText, Calendar, Clock, Edit3, Loader2, Sparkles, Inbox } from "lucide-react";
+import { FileText, Calendar, Clock, Edit3, Loader2, Sparkles, Inbox, ExternalLink } from "lucide-react";
 
 interface NoteListProps {
   onRefreshNeeded?: () => void;
@@ -103,9 +103,17 @@ export function NoteList({ refreshToken = 0 }: NoteListProps) {
             <Loader2 className="w-3.5 h-3.5 animate-spin text-emerald-400" />
           )}
         </div>
-        <span className="text-xs text-slate-400 font-mono">
-          Contract: {BOT_NOTES_CONTRACT_ADDRESS?.slice(0, 6)}...{BOT_NOTES_CONTRACT_ADDRESS?.slice(-4)}
-        </span>
+        <a
+          href={`https://scan.botchain.ai/address/${BOT_NOTES_CONTRACT_ADDRESS}`}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex items-center gap-1.5 text-xs text-emerald-400 hover:text-emerald-300 transition-colors font-medium group"
+          title="View Contract on Botchain Mainnet Explorer"
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+          <span>BotchainScan</span>
+          <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+        </a>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

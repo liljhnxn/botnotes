@@ -1,6 +1,6 @@
 # ChainNotes 📝
 
-**ChainNotes** is a simple, decentralized on-chain notes dApp built for **Botchain Testnet**. It enables users to create, view, and edit short notes that are permanently stored directly on the blockchain.
+**ChainNotes** is a simple, decentralized on-chain notes dApp built for **Botchain Mainnet**. It enables users to create, view, and edit short notes that are permanently stored directly on the blockchain.
 
 Every note is cryptographically owned by the creator's wallet. There is no centralized backend, no external database, no tracking, and no third-party API dependencies.
 

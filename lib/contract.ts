@@ -1,15 +1,25 @@
 import { Address } from "viem";
 
-const configuredAddress =
-  process.env.NEXT_PUBLIC_CHAIN_NOTES_ADDRESS ||
-  process.env.NEXT_PUBLIC_BOT_NOTES_ADDRESS;
+// Deployed ChainNotes smart contract address on Botchain Mainnet (Chain ID 677)
+export const CHAIN_NOTES_MAINNET_CONTRACT_ADDRESS: Address =
+  "0x4d59A58eA052f72eFC2c82165457A98AC4Ad0Afa";
 
-export const CHAIN_NOTES_CONTRACT_ADDRESS: Address | undefined =
-  configuredAddress &&
-  configuredAddress.trim().startsWith("0x") &&
-  configuredAddress.trim().length === 42
-    ? (configuredAddress.trim() as Address)
-    : undefined;
+// Ensure no testnet contract address from environment variables or cache is ever used
+const envAddress = (
+  process.env.NEXT_PUBLIC_CHAIN_NOTES_ADDRESS ||
+  process.env.NEXT_PUBLIC_BOT_NOTES_ADDRESS ||
+  ""
+).trim();
+
+const isTestnetAddress =
+  !envAddress ||
+  envAddress.toLowerCase() === "0x0000000000000000000000000000000000000000";
+
+export const CHAIN_NOTES_CONTRACT_ADDRESS: Address = (
+  !isTestnetAddress && envAddress.startsWith("0x") && envAddress.length === 42
+    ? (envAddress as Address)
+    : CHAIN_NOTES_MAINNET_CONTRACT_ADDRESS
+);
 
 // Backward-compatible alias
 export const BOT_NOTES_CONTRACT_ADDRESS = CHAIN_NOTES_CONTRACT_ADDRESS;

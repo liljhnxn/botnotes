@@ -101,11 +101,9 @@ export function NotesOverview({ onCreateClick }: NotesOverviewProps) {
         {/* Footer info: Explorer link */}
         {isContractConfigured && BOT_NOTES_CONTRACT_ADDRESS && (
           <div className="mt-6 pt-4 border-t border-slate-800/80 flex flex-wrap items-center justify-between text-xs text-slate-400 gap-3">
-            <div className="flex items-center gap-2 font-mono">
-              <span className="text-slate-500">Contract:</span>
-              <span className="text-slate-300 bg-slate-950/70 px-2 py-0.5 rounded-lg border border-slate-800">
-                {BOT_NOTES_CONTRACT_ADDRESS}
-              </span>
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-slate-300 font-medium">BOT Chain Mainnet Verified</span>
             </div>
             <div className="flex items-center gap-3">
               <a
