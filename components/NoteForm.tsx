@@ -96,7 +96,7 @@ export function NoteForm({ onSuccess }: NoteFormProps) {
             Create New Note
           </h2>
           <p className="text-xs text-slate-400 mt-0.5">
-            Store a note permanently on Botchain Testnet
+            Store a note permanently on Botchain Mainnet
           </p>
         </div>
       </div>
@@ -186,13 +186,17 @@ export function NoteForm({ onSuccess }: NoteFormProps) {
             </div>
             {txHash && (
               <a
-                href={`https://scan.bohr.life/tx/${txHash}`}
+                href={`https://scan.botchain.ai/tx/${txHash}`}
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-1.5 text-blue-400 hover:text-blue-300 underline text-[11px]"
               >
-                <ExternalLink className="w-3 h-3" />
-                View transaction on BohrScan ({txHash.slice(0, 10)}...{txHash.slice(-8)})
+                <img
+                  src="/botchain-logo.png"
+                  alt="BOT Chain Logo"
+                  className="w-3 h-3 rounded object-contain shrink-0"
+                />
+                View transaction on BotchainScan ({txHash.slice(0, 10)}...{txHash.slice(-8)})
               </a>
             )}
           </div>
@@ -206,12 +210,17 @@ export function NoteForm({ onSuccess }: NoteFormProps) {
               {txHash && (
                 <div>
                   <a
-                    href={`https://scan.bohr.life/tx/${txHash}`}
+                    href={`https://scan.botchain.ai/tx/${txHash}`}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1 text-[11px] text-emerald-400 underline hover:text-emerald-300"
+                    className="inline-flex items-center gap-1.5 text-[11px] text-emerald-400 underline hover:text-emerald-300"
                   >
-                    View on BohrScan <ExternalLink className="w-2.5 h-2.5" />
+                    <img
+                      src="/botchain-logo.png"
+                      alt="BOT Chain Logo"
+                      className="w-3 h-3 rounded object-contain shrink-0"
+                    />
+                    View on BotchainScan <ExternalLink className="w-2.5 h-2.5" />
                   </a>
                 </div>
               )}

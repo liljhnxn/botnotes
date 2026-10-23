@@ -6,10 +6,10 @@ import { Providers } from "@/components/Providers";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  title: "ChainNotes — On-Chain Notes on Botchain Testnet",
+  title: "ChainNotes — On-Chain Notes on Botchain Mainnet",
   description:
-    "A simple, decentralized on-chain notes dApp built on Botchain Testnet. Store, manage, and edit your notes directly on the blockchain.",
-  keywords: ["ChainNotes", "Botchain", "Testnet", "Web3", "Blockchain", "Notes", "Decentralized"],
+    "A simple, decentralized on-chain notes dApp built on Botchain Mainnet. Store, manage, and edit your notes directly on the blockchain.",
+  keywords: ["ChainNotes", "Botchain", "Mainnet", "Web3", "Blockchain", "Notes", "Decentralized"],
   icons: {
     icon: "/icon.svg",
     shortcut: "/icon.svg",

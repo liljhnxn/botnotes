@@ -60,7 +60,7 @@ export function NoteList({ refreshToken = 0 }: NoteListProps) {
         </div>
         <h3 className="text-base font-semibold text-slate-200">Wallet Not Connected</h3>
         <p className="text-sm text-slate-400 max-w-sm mx-auto mt-1.5">
-          Connect your wallet above to read and manage your private on-chain notes on Botchain Testnet.
+          Connect your wallet above to read and manage your private on-chain notes on Botchain Mainnet.
         </p>
       </div>
     );
@@ -70,7 +70,7 @@ export function NoteList({ refreshToken = 0 }: NoteListProps) {
     return (
       <div className="glow-card rounded-2xl p-12 text-center border border-slate-800/80">
         <Loader2 className="w-8 h-8 text-emerald-400 animate-spin mx-auto mb-3" />
-        <p className="text-sm text-slate-300">Loading your on-chain notes from Botchain...</p>
+        <p className="text-sm text-slate-300">Loading your on-chain notes from Botchain Mainnet...</p>
       </div>
     );
   }
@@ -83,7 +83,7 @@ export function NoteList({ refreshToken = 0 }: NoteListProps) {
         </div>
         <h3 className="text-base font-semibold text-white">No Notes Found</h3>
         <p className="text-sm text-slate-400 max-w-md mx-auto mt-1.5">
-          You haven&apos;t created any notes with this wallet yet. Use the form above to record your first on-chain note on Botchain Testnet!
+          You haven&apos;t created any notes with this wallet yet. Use the form above to record your first on-chain note on Botchain Mainnet!
         </p>
       </div>
     );

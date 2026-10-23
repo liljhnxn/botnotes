@@ -191,13 +191,18 @@ export function EditNoteModal({ note, isOpen, onClose, onSuccess }: EditNoteModa
               </div>
               {txHash && (
                 <a
-                  href={`https://scan.bohr.life/tx/${txHash}`}
+                  href={`https://scan.botchain.ai/tx/${txHash}`}
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-center gap-1.5 text-blue-400 hover:text-blue-300 underline text-[11px]"
                 >
+                  <img
+                    src="/botchain-logo.png"
+                    alt="BOT Chain Logo"
+                    className="w-3 h-3 rounded object-contain shrink-0"
+                  />
+                  View transaction on BotchainScan
                   <ExternalLink className="w-3 h-3" />
-                  View transaction on BohrScan
                 </a>
               )}
             </div>

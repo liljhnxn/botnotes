@@ -3,7 +3,7 @@ pragma solidity ^0.8.24;
 
 /**
  * @title ChainNotes
- * @dev A simple, decentralized on-chain notes contract for Botchain Testnet.
+ * @dev A simple, decentralized on-chain notes contract for Botchain Mainnet.
  * Notes are stored directly on the blockchain and indexed per user wallet.
  * Blockchain data is public and permanent - users must not store private keys or secrets.
  */

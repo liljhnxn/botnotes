@@ -62,7 +62,7 @@ export function NotesOverview({ onCreateClick }: NotesOverviewProps) {
             </h2>
 
             <p className="text-sm text-slate-300 leading-relaxed">
-              ChainNotes stores your thoughts, code snippets, and checklists directly on Botchain Testnet. 
+              ChainNotes stores your thoughts, code snippets, and checklists directly on Botchain Mainnet. 
               Each note is cryptographically owned by your connected wallet, accessible only by you, and permanent.
             </p>
           </div>
@@ -100,19 +100,43 @@ export function NotesOverview({ onCreateClick }: NotesOverviewProps) {
 
         {/* Footer info: Explorer link */}
         {isContractConfigured && BOT_NOTES_CONTRACT_ADDRESS && (
-          <div className="mt-6 pt-4 border-t border-slate-800/80 flex flex-wrap items-center justify-between text-xs text-slate-400 gap-2">
-            <span className="font-mono">
-              Contract Address: {BOT_NOTES_CONTRACT_ADDRESS}
-            </span>
-            <a
-              href={`https://scan.bohr.life/address/${BOT_NOTES_CONTRACT_ADDRESS}`}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 transition-colors"
-            >
-              <span>View Verified Contract on BohrScan</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
+          <div className="mt-6 pt-4 border-t border-slate-800/80 flex flex-wrap items-center justify-between text-xs text-slate-400 gap-3">
+            <div className="flex items-center gap-2 font-mono">
+              <span className="text-slate-500">Contract:</span>
+              <span className="text-slate-300 bg-slate-950/70 px-2 py-0.5 rounded-lg border border-slate-800">
+                {BOT_NOTES_CONTRACT_ADDRESS}
+              </span>
+            </div>
+            <div className="flex items-center gap-3">
+              <a
+                href={`https://scan.botchain.ai/address/${BOT_NOTES_CONTRACT_ADDRESS}`}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 hover:text-emerald-300 hover:bg-emerald-500/20 transition-all font-medium"
+              >
+                <img
+                  src="/botchain-logo.png"
+                  alt="BOT Chain Logo"
+                  className="w-4 h-4 rounded object-contain shrink-0"
+                />
+                <span>View Contract on Mainnet Explorer</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+              <a
+                href="https://scan.botchain.ai"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 text-slate-400 hover:text-slate-200 transition-colors"
+              >
+                <img
+                  src="/botchain-logo.png"
+                  alt="BOT Chain Logo"
+                  className="w-3.5 h-3.5 rounded object-contain shrink-0"
+                />
+                <span>BotchainScan</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </div>
           </div>
         )}
       </div>

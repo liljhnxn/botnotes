@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useAccount, useConnect, useDisconnect, useChainId, useSwitchChain, useBalance } from "wagmi";
-import { botchainTestnet } from "@/lib/botchain";
+import { botchainMainnet } from "@/lib/botchain";
 import { Wallet, LogOut, AlertTriangle, CheckCircle2, ChevronDown, ExternalLink } from "lucide-react";
 
 export function WalletButton() {
@@ -13,7 +13,7 @@ export function WalletButton() {
   const { switchChain, isPending: isSwitching } = useSwitchChain();
   const { data: balanceData } = useBalance({
     address,
-    chainId: botchainTestnet.id,
+    chainId: botchainMainnet.id,
   });
 
   const [mounted, setMounted] = useState(false);
@@ -29,7 +29,7 @@ export function WalletButton() {
     );
   }
 
-  const isWrongNetwork = isConnected && chainId !== botchainTestnet.id;
+  const isWrongNetwork = isConnected && chainId !== botchainMainnet.id;
 
   const truncateAddress = (addr?: string) => {
     if (!addr) return "";
@@ -60,17 +60,17 @@ export function WalletButton() {
     <div className="flex items-center gap-2">
       {isWrongNetwork ? (
         <button
-          onClick={() => switchChain({ chainId: botchainTestnet.id })}
+          onClick={() => switchChain({ chainId: botchainMainnet.id })}
           disabled={isSwitching}
           className="inline-flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/30 hover:bg-amber-500/20 transition-all animate-pulse"
         >
           <AlertTriangle className="w-3.5 h-3.5 text-amber-400" />
-          {isSwitching ? "Switching..." : "Switch to Botchain Testnet"}
+          {isSwitching ? "Switching..." : "Switch to Botchain Mainnet"}
         </button>
       ) : (
         <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs font-medium text-emerald-400">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-          <span>Botchain Testnet (968)</span>
+          <span>Botchain Mainnet (677)</span>
         </div>
       )}
 
@@ -105,15 +105,20 @@ export function WalletButton() {
 
               {address && (
                 <a
-                  href={`https://scan.bohr.life/address/${address}`}
+                  href={`https://scan.botchain.ai/address/${address}`}
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-center justify-between px-3 py-2 text-xs text-slate-300 hover:text-white hover:bg-slate-800/60 rounded-lg mt-1 transition-colors"
                 >
                   <span className="flex items-center gap-2">
-                    <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
-                    View on BohrScan
+                    <img
+                      src="/botchain-logo.png"
+                      alt="BOT Chain Logo"
+                      className="w-3.5 h-3.5 rounded object-contain shrink-0"
+                    />
+                    View on BotchainScan
                   </span>
+                  <ExternalLink className="w-3 h-3 text-slate-400" />
                 </a>
               )}
 

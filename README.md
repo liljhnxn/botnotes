@@ -18,13 +18,13 @@ Every note is cryptographically owned by the creator's wallet. There is no centr
 
 ## Features
 
-- **Decentralized Note Storage**: Notes are persisted in the `ChainNotes` smart contract on Botchain Testnet.
+- **Decentralized Note Storage**: Notes are persisted in the `ChainNotes` smart contract on Botchain Mainnet.
 - **Wallet-Owned**: Each wallet accesses and manages only its own notes.
 - **On-Chain Creation & Editing**: Users can create new notes and update existing notes with real-time character limits.
 - **Timestamp Tracking**: Tracks both `createdAt` and `updatedAt` block timestamps.
 - **Zero Centralized Backend**: Pure Web3 architecture with direct RPC communication.
 - **Modern Dark UI**: Polished, responsive dark theme styled with Tailwind CSS and Lucide React.
-- **Transaction Feedback**: Real-time status indicators (Confirm in wallet, Submitted, Confirming, Success) with direct links to the BohrScan Explorer.
+- **Transaction Feedback**: Real-time status indicators (Confirm in wallet, Submitted, Confirming, Success) with direct links to the BotchainScan Explorer.
 
 ---
 
@@ -37,15 +37,17 @@ Every note is cryptographically owned by the creator's wallet. There is no centr
 
 ---
 
-## Botchain Testnet Configuration
+## Botchain Mainnet Configuration
 
 | Parameter | Value |
 |---|---|
-| **Network Name** | Botchain Testnet |
-| **Chain ID** | `968` |
-| **RPC Endpoint** | `https://rpc.bohr.life` |
-| **Block Explorer** | `https://scan.bohr.life` |
+| **Network Name** | Botchain Mainnet |
+| **Chain ID** | `677` |
+| **RPC Endpoint** | `https://rpc.botchain.ai` |
+| **Block Explorer** | [https://scan.botchain.ai](https://scan.botchain.ai) |
 | **Currency Symbol** | `BOT` |
+| **Total Supply** | 150 Million |
+| **Live Mainnet Contract** | [`0x4d59A58eA052f72eFC2c82165457A98AC4Ad0Afa`](https://scan.botchain.ai/address/0x4d59A58eA052f72eFC2c82165457A98AC4Ad0Afa) |
 
 ---
 
@@ -75,7 +77,8 @@ chainnotes/
 ├── test/
 │   └── BotNotes.ts             # Comprehensive Hardhat unit tests
 ├── scripts/
-│   └── deploy.ts               # Deployment script for Botchain Testnet
+│   ├── deploy-mainnet.cjs      # Direct low-gas deployment script for Botchain Mainnet
+│   └── deploy.ts               # Hardhat deployment script for Botchain Mainnet
 ├── app/
 │   ├── globals.css             # Tailwind base and dark Web3 styling
 │   ├── layout.tsx              # Next.js root layout with Providers
@@ -88,7 +91,7 @@ chainnotes/
 │   ├── NoteList.tsx            # User note cards and empty state
 │   └── EditNoteModal.tsx       # Note editing modal dialog with tx lifecycle
 ├── lib/
-│   ├── botchain.ts             # Custom Botchain Testnet chain and wagmi configuration
+│   ├── botchain.ts             # Custom Botchain Mainnet chain and wagmi configuration
 │   └── contract.ts             # Contract ABI, typed interfaces, and address resolver
 ├── hardhat.config.ts           # Hardhat configuration
 ├── package.json
@@ -118,14 +121,14 @@ cp .env.example .env
 Set the following variables:
 
 ```env
-# Deployed contract address (set after deployment)
-NEXT_PUBLIC_CHAIN_NOTES_ADDRESS=0xA057180c9AE6Dac9ee124875a8c5cB0546eB3ab7
+# Deployed contract address
+NEXT_PUBLIC_CHAIN_NOTES_ADDRESS=0x4d59A58eA052f72eFC2c82165457A98AC4Ad0Afa
 
-# Deployer wallet private key (required only for deploying to testnet)
+# Deployer wallet private key (required only for deploying to Mainnet)
 PRIVATE_KEY=your_private_key_here
 
-# Botchain Testnet RPC
-BOTCHAIN_RPC_URL=https://rpc.bohr.life
+# Botchain Mainnet RPC
+BOTCHAIN_RPC_URL=https://rpc.botchain.ai
 ```
 
 ---
@@ -148,41 +151,20 @@ The tests verify:
 
 ---
 
-## Deploying to Botchain Testnet
+## Deploying to Botchain Mainnet
 
-To deploy the contract to Botchain Testnet:
-
-1. Ensure your `.env` contains a valid `PRIVATE_KEY` funded with testnet `BOT` tokens.
-2. Run the deployment script:
+To deploy or redeploy the contract to Botchain Mainnet:
 
 ```bash
-npm run deploy:testnet
+npm run deploy:mainnet
 ```
 
-The script will output:
-- Network Name (`botchainTestnet`)
-- Chain ID (`968`)
-- Deployer Address & Balance
-- Deployed Contract Address
-- Direct BohrScan Explorer link
-
-3. Copy the deployed contract address into your `.env`:
-
-```env
-NEXT_PUBLIC_CHAIN_NOTES_ADDRESS=0x9Bb73D352fdc61F4C763f43e9188697d0dADBFa8
-```
-
----
-
-## Verifying the Smart Contract on BohrScan
-
-To verify the contract source code on the BohrScan block explorer:
-
-```bash
-npm run verify:testnet 0x9Bb73D352fdc61F4C763f43e9188697d0dADBFa8
-```
-
-Direct code link: [BohrScan Verified Contract Code](https://scan.bohr.life/address/0x9Bb73D352fdc61F4C763f43e9188697d0dADBFa8#code)
+The script automatically:
+- Connects to Botchain Mainnet (Chain ID `677`)
+- Checks deployer balance and network gas price
+- Deploys `ChainNotes` with optimal minimal gas settings (typically < 0.02 BOT)
+- Updates `.env` with the new contract address
+- Provides the direct BotchainScan Explorer link: [https://scan.botchain.ai/address/0x4d59A58eA052f72eFC2c82165457A98AC4Ad0Afa](https://scan.botchain.ai/address/0x4d59A58eA052f72eFC2c82165457A98AC4Ad0Afa)
 
 ---
 

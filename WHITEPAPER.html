@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChainNotes — Whitepaper & Pitch Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090b10;
+      --card-bg: #111522;
+      --border: #1e2638;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --primary: #3b82f6;
+      --primary-light: #60a5fa;
+      --accent: #10b981;
+      --code-bg: #0d1117;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --card-bg: #ffffff;
+        --border: #e2e8f0;
+        --text: #0f172a;
+        --text-muted: #64748b;
+        --primary: #2563eb;
+        --primary-light: #1d4ed8;
+        --accent: #059669;
+        --code-bg: #f1f5f9;
+      }
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 48px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    }
+    @media print {
+      body {
+        background: white;
+        color: black;
+        padding: 0;
+      }
+      .container {
+        border: none;
+        box-shadow: none;
+        padding: 20px;
+        max-width: 100%;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+    header {
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 28px;
+      margin-bottom: 36px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: rgba(59, 130, 246, 0.15);
+      color: var(--primary-light);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-size: 2.3rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #fff 30%, var(--primary-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    @media (prefers-color-scheme: light) {
+      h1 {
+        background: linear-gradient(135deg, #0f172a 30%, var(--primary) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+    .subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+      padding: 16px;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.88rem;
+    }
+    .meta-item strong {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .meta-item a {
+      color: var(--primary-light);
+      text-decoration: none;
+      word-break: break-all;
+    }
+    .meta-item a:hover {
+      text-decoration: underline;
+    }
+    .actions-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+      padding: 12px 18px;
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 10px;
+    }
+    .tabs {
+      display: flex;
+      gap: 8px;
+    }
+    .tab-btn {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
+      color: var(--text);
+      transition: all 0.2s ease;
+    }
+    .tab-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+    .print-btn {
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      background: var(--accent);
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.2s;
+    }
+    .print-btn:hover {
+      opacity: 0.9;
+    }
+    h2 {
+      font-size: 1.55rem;
+      margin-top: 36px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+      color: var(--primary-light);
+    }
+    h3 {
+      font-size: 1.2rem;
+      margin-top: 24px;
+      margin-bottom: 10px;
+    }
+    p, ul, ol {
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+    ul, ol {
+      padding-left: 24px;
+    }
+    li {
+      margin-bottom: 6px;
+    }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      padding: 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88em;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+      font-size: 0.92rem;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      text-align: left;
+    }
+    th {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--primary-light);
+    }
+    .slide-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .slide-num {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--primary-light);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="badge">Botchain Ecosystem • Mainnet Live</span>
+      <h1>ChainNotes 📝</h1>
+      <p class="subtitle">Decentralized Autonomous Micro-Publishing & Sovereign On-Chain Memory on Botchain</p>
+      
+      <div class="meta-grid">
+        <div class="meta-item">
+          <strong>Network</strong>
+          Botchain Mainnet (ID: 677)
+        </div>
+        <div class="meta-item">
+          <strong>Verified Contract</strong>
+          <a href="https://scan.botchain.ai/address/0x4d59A58eA052f72eFC2c82165457A98AC4Ad0Afa" target="_blank">0x4d59A5...0Afa</a>
+        </div>
+        <div class="meta-item">
+          <strong>Explorer</strong>
+          <a href="https://scan.botchain.ai" target="_blank">BotchainScan</a>
+        </div>
+        <div class="meta-item">
+          <strong>Repository</strong>
+          <a href="https://github.com/liljhnxn/botnotes" target="_blank">github.com/liljhnxn/botnotes</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="actions-bar no-print">
+      <div class="tabs">
+        <button class="tab-btn active" id="tabWhitepaper" onclick="showSection('whitepaper')">📄 Whitepaper</button>
+        <button class="tab-btn" id="tabPitchDeck" onclick="showSection('pitchdeck')">🎯 Pitch Deck</button>
+      </div>
+      <button class="print-btn" onclick="window.print()">
+        🖨️ Print / Save as PDF
+      </button>
+    </div>
+
+    <!-- WHITEPAPER SECTION -->
+    <main id="sectionWhitepaper">
+      <h2>Executive Summary</h2>
+      <p>
+        <strong>ChainNotes</strong> is an immutable, gas-optimized, on-chain text attestation and sovereign note-publishing protocol natively deployed on the <strong>Botchain</strong> blockchain. The protocol empowers any EVM wallet address or on-chain entity to persist, update, and index short-form text entries directly within the smart contract state. Operating with <strong>zero centralized servers, zero external databases, and zero indexing intermediaries</strong>, ChainNotes establishes an open public good for sovereign user thoughts, decentralized announcements, timestamped cryptographic proof-of-ideas, and on-chain agent memory.
+      </p>
+
+      <h2>1. Problem Statement</h2>
+      <h3>1.1 Centralized Data Custody & Ephemeral Information</h3>
+      <p>
+        In traditional Web2 platforms (Notion, Google Keep, Twitter/X), personal thoughts and public statements reside on centralized cloud architectures. Users face platform censorship, unannounced account suspensions, and retroactive modification by server operators.
+      </p>
+      <h3>1.2 Web3 Storage Friction</h3>
+      <p>
+        Existing Web3 alternatives often rely on IPFS gateways that suffer from gateway timeouts and pinning service dropouts, or overengineer text updates into heavy, gas-costly ERC-721 NFT mints that clutter wallets.
+      </p>
+
+      <h2>2. The ChainNotes Solution</h2>
+      <ul>
+        <li><strong>Direct Smart Contract Persistence</strong>: Notes are written directly into smart contract storage slots for permanent, high-availability retrieval.</li>
+        <li><strong>Cryptographic Ownership</strong>: Only the original creator address can modify existing notes.</li>
+        <li><strong>Dual Block Timestamping</strong>: Precise <code>createdAt</code> and <code>updatedAt</code> timestamps recorded directly from block headers.</li>
+        <li><strong>Zero Centralized Middleware</strong>: 100% decentralized architecture with direct JSON-RPC interaction.</li>
+      </ul>
+
+      <h2>3. Technical Specifications & Architecture</h2>
+      <pre><code>// Data Structure in ChainNotes.sol
+struct Note {
+    uint256 id;
+    address owner;
+    string title;       // 1 - 80 bytes
+    string content;     // 1 - 500 bytes
+    uint256 createdAt;  // Unix timestamp
+    uint256 updatedAt;  // Unix timestamp
+}</code></pre>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Network Name</td><td>Botchain Mainnet</td></tr>
+          <tr><td>Chain ID</td><td>677</td></tr>
+          <tr><td>RPC Endpoint</td><td>https://rpc.botchain.ai</td></tr>
+          <tr><td>Block Explorer</td><td>https://scan.botchain.ai</td></tr>
+          <tr><td>Contract Address</td><td>0x4d59A58eA052f72eFC2c82165457A98AC4Ad0Afa</td></tr>
+          <tr><td>Frontend Stack</td><td>Next.js 14 (App Router), Wagmi v2, Viem, Tailwind CSS</td></tr>
+          <tr><td>Smart Contract</td><td>Solidity ^0.8.24, Hardhat, Ethers.js v6</td></tr>
+        </tbody>
+      </table>
+
+      <h2>4. Security & Public Data Notice</h2>
+      <p>
+        Because blockchains are public and permanent, all notes stored in ChainNotes are globally visible. While updating a note refreshes the active state, historical versions remain permanently verifiable in transaction receipts. ChainNotes incorporates native frontend guardrails advising users never to publish private keys or sensitive personal credentials.
+      </p>
+    </main>
+
+    <!-- PITCH DECK SECTION -->
+    <main id="sectionPitchDeck" class="hidden">
+      <div class="slide-card">
+        <span class="slide-num">Slide 1 • Vision & Mission</span>
+        <h3>📝 ChainNotes: Sovereign Thoughts on Botchain</h3>
+        <p>The immutable, lightweight primitive for decentralized notes, public announcements, and AI agent memory.</p>
+      </div>
+
+      <div class="slide-card">
+        <span class="slide-num">Slide 2 • The Problem</span>
+        <h3>⚠️ Why Current Notes & Social Status Fail</h3>
+        <ul>
+          <li>Centralized cloud platforms wipe, censor, and monetize user content.</li>
+          <li>IPFS gateways timeout and require recurring payment pinning.</li>
+          <li>Heavy NFT contracts are too complex and gas-intensive for simple text logs.</li>
+        </ul>
+      </div>
+
+      <div class="slide-card">
+        <span class="slide-num">Slide 3 • The Solution</span>
+        <h3>✨ The ChainNotes Protocol</h3>
+        <ul>
+          <li><strong>Direct Storage</strong>: 100% on-chain note records on Botchain Mainnet.</li>
+          <li><strong>Ownership Enforced</strong>: Restricted updating guarded by cryptographic signature.</li>
+          <li><strong>Zero Backend</strong>: Pure client-to-blockchain communication.</li>
+        </ul>
+      </div>
+
+      <div class="slide-card">
+        <span class="slide-num">Slide 4 • Key Use Cases</span>
+        <h3>🚀 Real-World Applications</h3>
+        <ul>
+          <li><strong>Proof-of-Idea</strong>: Timestamp scientific, trading, or intellectual insights.</li>
+          <li><strong>Decentralized Announcements</strong>: Uncensorable dev logs and DAO updates.</li>
+          <li><strong>AI Agent Memory</strong>: Autonomous telemetry checkpoints for Botchain AI agents.</li>
+        </ul>
+      </div>
+
+      <div class="slide-card">
+        <span class="slide-num">Slide 5 • Live Deployment</span>
+        <h3>⛓️ Verified on BotchainScan</h3>
+        <p><strong>Contract:</strong> <code>0x4d59A58eA052f72eFC2c82165457A98AC4Ad0Afa</code></p>
+        <p><strong>Network:</strong> Botchain Mainnet (Chain ID 677)</p>
+        <p><strong>Explorer:</strong> <a href="https://scan.botchain.ai/address/0x4d59A58eA052f72eFC2c82165457A98AC4Ad0Afa" target="_blank" style="color:var(--primary-light);">scan.botchain.ai</a></p>
+        <p><strong>Repo:</strong> <a href="https://github.com/liljhnxn/botnotes" target="_blank" style="color:var(--primary-light);">github.com/liljhnxn/botnotes</a></p>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function showSection(section) {
+      const whitepaper = document.getElementById('sectionWhitepaper');
+      const pitchdeck = document.getElementById('sectionPitchDeck');
+      const tabWhitepaper = document.getElementById('tabWhitepaper');
+      const tabPitchDeck = document.getElementById('tabPitchDeck');
+
+      if (section === 'whitepaper') {
+        whitepaper.classList.remove('hidden');
+        pitchdeck.classList.add('hidden');
+        tabWhitepaper.classList.add('active');
+        tabPitchDeck.classList.remove('active');
+      } else {
+        whitepaper.classList.add('hidden');
+        pitchdeck.classList.remove('hidden');
+        tabWhitepaper.classList.remove('active');
+        tabPitchDeck.classList.add('active');
+      }
+    }
+  </script>
+</body>
+</html>

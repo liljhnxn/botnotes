@@ -21,7 +21,7 @@ describe("BotNotes", function () {
   describe("Creating Notes", function () {
     it("allows a user to create a note and verifies storage, creator, and timestamps", async function () {
       const title = "My First Note";
-      const content = "Hello Botchain Testnet!";
+      const content = "Hello Botchain Mainnet!";
 
       const tx = await botNotes.connect(alice).createNote(title, content);
       await tx.wait();
