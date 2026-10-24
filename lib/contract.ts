@@ -4,27 +4,15 @@ import { Address } from "viem";
 export const CHAIN_NOTES_MAINNET_CONTRACT_ADDRESS: Address =
   "0x4d59A58eA052f72eFC2c82165457A98AC4Ad0Afa";
 
-// Ensure no testnet contract address from environment variables or cache is ever used
-const envAddress = (
-  process.env.NEXT_PUBLIC_CHAIN_NOTES_ADDRESS ||
-  process.env.NEXT_PUBLIC_BOT_NOTES_ADDRESS ||
-  ""
-).trim();
-
-const isTestnetAddress =
-  !envAddress ||
-  envAddress.toLowerCase() === "0x0000000000000000000000000000000000000000";
-
-export const CHAIN_NOTES_CONTRACT_ADDRESS: Address = (
-  !isTestnetAddress && envAddress.startsWith("0x") && envAddress.length === 42
-    ? (envAddress as Address)
-    : CHAIN_NOTES_MAINNET_CONTRACT_ADDRESS
-);
+// Strictly enforce the verified Mainnet contract address across all environments
+// This completely prevents any legacy testnet environment variables on Vercel from overriding it
+export const CHAIN_NOTES_CONTRACT_ADDRESS: Address =
+  CHAIN_NOTES_MAINNET_CONTRACT_ADDRESS;
 
 // Backward-compatible alias
 export const BOT_NOTES_CONTRACT_ADDRESS = CHAIN_NOTES_CONTRACT_ADDRESS;
 
-export const isContractConfigured = Boolean(CHAIN_NOTES_CONTRACT_ADDRESS);
+export const isContractConfigured = true;
 
 export const CHAIN_NOTES_ABI = [
   {
